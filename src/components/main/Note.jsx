@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './Note.css'
 
 export const Note = (props) => {
-  const [enteredNote, setEnteredNote] = useState("");
+  const [enteredNote, setEnteredNote] = useState('');
   const [isValid, setIsValid] = useState(true);  
 
   // if(enteredNote === "") {
@@ -10,8 +10,10 @@ export const Note = (props) => {
   // }
 
   const contentChangeHandler = (e) => {
+    if(e.target.value.trim().length > 0){
+      setIsValid(true)
+    }
     setEnteredNote(e.target.value)
-    setIsValid(true)
   }
 
   const onSubmitHandler = (e) => {
@@ -28,19 +30,18 @@ export const Note = (props) => {
     }
 
     props.getNote(data);
-    setEnteredNote('');
+    setEnteredNote("");
   }
 
 
   return (
     <div className=" w-75 mt-4">
       <form onSubmit={onSubmitHandler} className="d-flex justify-content-between w-100 flex-column">
-        <div className='p-2'>
-          <label style={{color: !isValid ? "red" : 'black'}}>Type in your thougth</label>
+        <div className={`p-2 ${!isValid ? 'invalid' : ''}`}>
+          <label>Type in your thougth</label>
         </div>
-        <div className='d-flex justify-content-between'>
+        <div className={`d-flex justify-content-between ${!isValid ? 'invalid' : ''}`}>
           <input
-            style={{borderColor: !isValid ? 'red' : 'rgb(109,118,126)'}}
             type="text"
             name="get_text"
             className="form-control m-1"

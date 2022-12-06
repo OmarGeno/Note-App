@@ -1,0 +1,8 @@
+.invalid  input {
+    border-color: red;
+    background-color: #e3fff7;
+}
+
+.invalid  label {
+    color: red;
+}
